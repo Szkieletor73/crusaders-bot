@@ -43,8 +43,6 @@ client.on('message', msg => {
             call.edit(createEmbed("hallsEnd", msg.author))
           })
       })
-    // call.react("✅"),
-    // call.react("❌")
   }
 });
 
