@@ -4,7 +4,7 @@
   "description": "Bot for Crusaders of Halls Discord",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
