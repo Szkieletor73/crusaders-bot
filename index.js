@@ -41,16 +41,16 @@ function createEmbed(type, leader = null) {
 }
 
 function sendRaid(type, leader, channel, guild) {
-  let filter = (reaction, user) => { return reaction.emoji.name === "❌" && user.id === leader.id; }
+  let filter = (reaction, user) => { return reaction.emoji.name === "no" && user.id === leader.id; }
   
   channel.send("@here - " + loc[type].name + " run started by " + leader + ".")
 
   channel.send(createEmbed(type, leader))
     .then(function (call) {
-      call.react("❌").then().catch(console.error)
+      // call.react("❌").then().catch(console.error)
 
-      loc[type].reacts.forEach(el => {
-        call.react(guild.emojis.find(emoji => emoji.name == el)).then().catch(console.error)
+      loc[type].reacts.forEach(async function(el){
+        await call.react(guild.emojis.find(emoji => emoji.name == el)).then().catch(console.error)
       })
 
       call.awaitReactions(filter, { max: 1 })
