@@ -43,7 +43,7 @@ function createEmbed(type, leader = null) {
 function sendRaid(type, leader, channel, guild) {
   let filter = (reaction, user) => { return reaction.emoji.name === "❌" && user.id === leader.id; }
   
-  channel.send("@here - " + type.charAt(0).toUpperCase() + type.slice(1) + " run started by " + leader + ".")
+  channel.send("@here - " + loc[type].name + " run started by " + leader + ".")
 
   channel.send(createEmbed(type, leader))
     .then(function (call) {
