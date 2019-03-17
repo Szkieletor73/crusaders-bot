@@ -1,6 +1,6 @@
 {
   "generic": {
-    "footer": " | Bot Maintainer: @Szkieletor#5874",
+    "footer": " | Bot Maintainer: @Szkieletor",
     "end": "\nRaid leader can react with ${guild.emojis.find(emoji => emoji.name == 'no')} to end the call.",
     "voice": "\nVoice channel: ",
     "ended": "Run is in progress or complete."

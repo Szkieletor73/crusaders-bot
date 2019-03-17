@@ -10,7 +10,7 @@ var raids = config.raids
 
 var prefix = "!"
 
-function createEmbed(type, leader = null) {
+function createEmbed(type, leader = null, guild = null) {
   embed = new Discord.RichEmbed()
   switch(type){
     case "cult":
@@ -21,7 +21,7 @@ function createEmbed(type, leader = null) {
     case "tomb":
     case "shatts":
       embed.setColor(loc[type].color)
-      embed.addField(loc[type].name, '`' + loc[type].desc + loc.generic.end + '`')
+      embed.addField(loc[type].name, eval('`' + loc[type].desc + loc.generic.end + '`'))
       embed.setFooter(loc[type].footer + leader.username + loc.generic.footer)
       break;
     case "cultEnd":
@@ -45,7 +45,7 @@ function sendRaid(type, leader, channel, guild) {
   
   channel.send("@here - " + loc[type].name + " run started by " + leader + ".")
 
-  channel.send(createEmbed(type, leader))
+  channel.send(createEmbed(type, leader, guild))
     .then(function (call) {
       // call.react("❌").then().catch(console.error)
 
