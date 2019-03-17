@@ -5,16 +5,107 @@
     "voice": "\nVoice channel: ",
     "ended": "Run is in progress or complete."
   },
+  "event": {
+    "color": "WHITE",
+    "name": "Event Dungeons",
+    "desc": "React with :yes: and join voice to participate.\nReact with :key: if you have any event keys and are willing to pop.\nReact with a class or ability if you plan to bring it to the run.",
+    "footer": "Raid Leader: ",
+    "reacts": [
+      "shatts",
+      "shattskey",
+      "paladin",
+      "warrior",
+      "knight",
+      "mystic",
+      "planewalker",
+      "priest"
+    ]
+  },
   "cult": {
     "color": "RED",
     "name": "Lost Halls - Cult",
-    "desc": "React with :white_check_mark: and join voice to participate.\nReact with :key: if you have key and are willing to pop.\nReact with :ok_hand: if you have a vial and are willing to pop.",
-    "footer": "Raid Leader: "
+    "desc": "React with :cult: and join voice to participate.\nReact with :hallskey: if you have a key and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
+    "footer": "Raid Leader: ",
+    "reacts": [
+      "cult",
+      "hallskey",
+      "paladin",
+      "warrior",
+      "knight",
+      "ogmur",
+      "paladin",
+      "mseal",
+      "mystic",
+      "planewalker",
+      "priest",
+      "puri"
+    ]
   },
   "void": {
     "color": "BLUE",
     "name": "Lost Halls - Void",
-    "desc": "React with :white_check_mark: and join voice to participate.\nReact with :key: if you have key and are willing to pop.\nReact with :ok_hand: if you have a vial and are willing to pop.",
-    "footer": "Raid Leader: "
+    "desc": "React with :void: and join voice to participate.\nReact with :hallskey: if you have a key and are willing to pop.\nReact with :vial: if you have a vial and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
+    "footer": "Raid Leader: ",
+    "reacts": [
+      "void",
+      "hallskey",
+      "vial",
+      "paladin",
+      "warrior",
+      "knight",
+      "ogmur",
+      "paladin",
+      "mseal",
+      "mystic",
+      "planewalker",
+      "priest",
+      "puri"
+    ]
+  },
+  "tomb": {
+    "color": "YELLOW",
+    "name": "Tomb of the Ancients",
+    "desc": "React with :tomb: and join voice to participate.\nReact with :tombkey: if you have a key and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
+    "footer": "Raid Leader: ",
+    "reacts": [
+      "tomb",
+      "tombkey",
+      "mystic",
+      "planewalker"
+    ]
+  },
+  "thicket": {
+    "color": "GREEN",
+    "name": "Secluded Thicket",
+    "desc": "React with :thicc: and join voice to participate.\nReact with :thicckey: if you have a key and are willing to pop.",
+    "footer": "Raid Leader: ",
+    "reacts": [
+      "thicc",
+      "thicckey"
+    ]
+  },
+  "ot": {
+    "color": "BLUE",
+    "name": "Ocean Trench",
+    "desc": "React with :tomb: and join voice to participate.\nReact with :tombkey: if you have a key and are willing to pop.\nReact with a :planewalker: if you can and want to rush.",
+    "footer": "Raid Leader: ",
+    "reacts": [
+      "tomb",
+      "tombkey",
+      "planewalker"
+    ]
+  },
+  "shatts": {
+    "color": "GREEN",
+    "name": "Shatters",
+    "desc": "React with :shatts: and join voice to participate.\nReact with :shattskey: if you have a key and are willing to pop.\nReact with a class or ability if you plan to bring it to the run.\nReact with :planewalker: if you have a Planewalker or a Trickster.\nReact with :priest: if you have a priest capable of supporting lavawalking.",
+    "footer": "Raid Leader: ",
+    "reacts": [
+      "shatts",
+      "shattskey",
+      "mystic",
+      "planewalker",
+      "priest"
+    ]
   }
 }
