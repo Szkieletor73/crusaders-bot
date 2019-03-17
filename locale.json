@@ -46,7 +46,7 @@
   "void": {
     "color": "BLUE",
     "name": "Lost Halls - Void",
-    "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'pcave')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'lostHalls')} if you have a key and are willing to pop.\nReact with :vial: if you have a vial and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
+    "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'pcave')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'lostHalls')} if you have a key and are willing to pop.\nReact with ${guild.emojis.find(emoji => emoji.name == 'vial')} if you have a vial and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
     "footer": "Raid Leader: ",
     "reacts": [
       "void",
@@ -68,7 +68,7 @@
   "tomb": {
     "color": "YELLOW",
     "name": "Tomb of the Ancients",
-    "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'tomb')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'tomb')} if you have a key and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
+    "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'tomb')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'tombkey')} if you have a key and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
     "footer": "Raid Leader: ",
     "reacts": [
       "tomb",
