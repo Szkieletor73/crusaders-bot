@@ -21,7 +21,7 @@ function createEmbed(type, leader = null) {
     case "tomb":
     case "shatts":
       embed.setColor(loc[type].color)
-      embed.addField(loc[type].name, loc[type].desc + loc.generic.end)
+      embed.addField(loc[type].name, '`' + loc[type].desc + loc.generic.end + '`')
       embed.setFooter(loc[type].footer + leader.username + loc.generic.footer)
       break;
     case "cultEnd":
