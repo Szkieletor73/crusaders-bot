@@ -1,12 +1,16 @@
 {
   "name": "crusaders_bot",
-  "version": "1.0.0",
-  "description": "Bot for Crusaders of Halls Discord",
+  "version": "0.4.0",
+  "description": "Bot for Crusaders of Halls Discord. Mirrors some features of Pubhalls bot.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Szkieletor73/crusaders-bot.git"
+  },
+  "author": "Szkieletor",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2",
