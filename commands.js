@@ -66,6 +66,9 @@ exports.verifyDone = (author, guild) => {
       if ((res.desc1.includes(entry.tag) || res.desc2.includes(entry.tag) || res.desc3.includes(entry.tag)) && res.guild == "Crusaders of Halls") {
         entry.member.addRole(guild.roles.find(role => role.name == res.guild_rank))
         author.send("Verification for " + res.player + " successful. Welcome!")
+        verify = verify.filter(function (obj) {
+          return obj.user !== author.tag;
+        });
       } else {
         author.send("Verification failed - couldn't find the verification tag in your description, or you're not a member of the guild. Try again, or DM any Owner to verify manually.\nTry !cancel if you need a new tag.")
       }
