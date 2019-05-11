@@ -15,11 +15,7 @@ dotenv.config()
 
 var guild
 
-var raids = config.raids
-
-var prefix = "!"
-
-var verify = []
+// var verify = []
 
 // Hooks
 
@@ -29,7 +25,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if (msg.content.indexOf(prefix) === 0) {
+  if (msg.content.indexOf(config.prefix) === 0) {
     let content = msg.content.split(" ")
     var cmd = content.shift().substring(1, msg.content.length)
     var args = content
@@ -41,6 +37,7 @@ client.on('message', msg => {
         commands.sendRaid(args, msg.author, msg.channel, msg.guild)
         msg.delete()
         break;
+
       case "listEmojis":
         if(msg.author.id == 95310448697548800) {
           console.log(msg.guild.emojis)
@@ -49,6 +46,15 @@ client.on('message', msg => {
           msg.reply("You can't do that.")
         }
         break;
+
+      case "verify":
+        commands.verify(args, msg.author)
+        break;
+
+      case "done":
+        commands.verifyDone(msg.author, guild)
+        break;
+
       default:
         console.log("Unknown command.")
     }

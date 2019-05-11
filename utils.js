@@ -4,10 +4,13 @@
  *
 ***/
 const Discord = require('discord.js')
+const config = require('./config')
+const http = require('http')
+const https = require('https')
 
 const raids = require('./raids')
 
-function genVerifyTag(length) {
+exports.genVerifyTag = (length) => {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -17,24 +20,26 @@ function genVerifyTag(length) {
   return text;
 }
 
-function getRealmEye(player) {
+exports.getRealmEye = (player) => {
+  return new Promise((resolve, reject) => {
+    https.get('https://nightfirec.at/realmeye-api/?player=' + player, (resp) => {
+      let data = ''
 
-  https.get('https://nightfirec.at/realmeye-api/?player=' + player, (resp) => {
-    let data = '';
+      // A chunk of data has been recieved.
+      resp.on('data', (chunk) => {
+        data += chunk
+      });
 
-    // A chunk of data has been recieved.
-    resp.on('data', (chunk) => {
-      data += chunk;
+      // The whole response has been received. Print out the result.
+      resp.on('end', () => {
+        resolve(JSON.parse(data))
+      });
+
+    }).on("error", (err) => {
+      console.log("Error: " + err.message);
+      reject(err)
     });
-
-    // The whole response has been received. Print out the result.
-    resp.on('end', () => {
-      console.log(JSON.parse(data));
-    });
-
-  }).on("error", (err) => {
-    console.log("Error: " + err.message);
-  });
+  })
 }
 
 exports.createEmbedRaid = (type, leader = null, guild = null, time = null) => {
@@ -50,7 +55,6 @@ exports.createEmbedRaid = (type, leader = null, guild = null, time = null) => {
   }
   embed.setFooter(raids.generic.raidLeader + leader.username)
   if(time != null && time != undefined && time != "") {
-    console.log("Settings time link")
     embed.setTitle('Raid scheduled for: ' + time.toString().replace(/\+/g, ' '))
     embed.setURL('https://www.wolframalpha.com/input/?i=' + time + '+in+local+time')
   } else {
