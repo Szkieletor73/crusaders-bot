@@ -52,7 +52,7 @@ client.on('message', msg => {
         break;
 
       case "done":
-        commands.verifyDone(msg.author, guild)
+        commands.verifyDone(msg.author, msg.member, guild)
         break;
 
       default:

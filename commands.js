@@ -59,13 +59,13 @@ exports.verify = (args, author) => {
   }
 }
 
-exports.verifyDone = (author, guild) => {
+exports.verifyDone = (author, member, guild) => {
   console.log(verify)
   if (verify.find(x => x.user == author.tag)) {
     entry = verify.find(x => x.user == author.tag)
     util.getRealmEye(entry.player).then(res => {
       if ((res.desc1.includes(entry.tag) || res.desc2.includes(entry.tag) || res.desc3.includes(entry.tag)) && res.guild == "Crusaders of Halls") {
-        author.addRole(guild.roles.find(role => role.name == res.guild_rank))
+        member.addRole(guild.roles.find(role => role.name == res.guild_rank))
         author.send("Verification for " + res.player + " successful. Welcome!")
       } else {
         author.send("Verification failed - couldn't find the verification tag in your description, or you're not a member of the guild. Try again, or DM any Owner to verify manually.")
