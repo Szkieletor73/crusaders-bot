@@ -49,6 +49,7 @@ client.on('message', msg => {
 
       case "verify":
         commands.verify(args, msg.author, msg.member)
+        msg.delete()
         break;
 
       case "done":
