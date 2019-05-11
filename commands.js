@@ -60,7 +60,6 @@ exports.verify = (args, author, member) => {
 }
 
 exports.verifyDone = (author, guild) => {
-  console.log(verify)
   if (verify.find(x => x.user == author.tag)) {
     entry = verify.find(x => x.user == author.tag)
     util.getRealmEye(entry.player).then(res => {

@@ -21,7 +21,7 @@ var guild
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
-  guild = client.guilds.find(x => x.id == "556411675264417824")
+  guild = client.guilds.find(x => x.id == "552608426966908928")
 });
 
 client.on('message', msg => {
