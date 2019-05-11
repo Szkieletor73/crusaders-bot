@@ -55,6 +55,10 @@ client.on('message', msg => {
         commands.verifyDone(msg.author, msg.member, guild)
         break;
 
+      case "cancel":
+        commands.verifyCancel(msg.author)
+        break;
+
       default:
         console.log("Unknown command.")
     }

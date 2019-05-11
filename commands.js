@@ -53,7 +53,7 @@ exports.verify = (args, author) => {
     let player = args[0]
     let tag = util.genVerifyTag(8)
     verify.push({ "user": author.tag, "player": player, "tag": tag })
-    author.send("Verification started. Please go to your RealmEye profile and add the following to *any* line of your description: `" + tag + "`\nWhen you're done, reply with `" + config.prefix + "done`")
+    author.send("Verification started. Please go to your RealmEye profile and add the following to *any* line of your description: `" + tag + "`\nWhen you're done, reply with `" + config.prefix + "done`\nIf something went wrong, use `" + config.prefix + "cancel` and try again")
   } else {
     author.send("Please include your full name as visible on RealmEye, like this: `!verify " + author.username + "`")
   }
@@ -68,11 +68,22 @@ exports.verifyDone = (author, member, guild) => {
         member.addRole(guild.roles.find(role => role.name == res.guild_rank))
         author.send("Verification for " + res.player + " successful. Welcome!")
       } else {
-        author.send("Verification failed - couldn't find the verification tag in your description, or you're not a member of the guild. Try again, or DM any Owner to verify manually.")
+        author.send("Verification failed - couldn't find the verification tag in your description, or you're not a member of the guild. Try again, or DM any Owner to verify manually.\nTry !cancel if you need a new tag.")
       }
     })
   } else {
     author.send("You have not started verification yet. Please use `" + config.prefix + "verify InGameName` first.")
+  }
+}
+
+exports.verifyCancel = (author) => {
+  if(verify.find(x => x.user == author.tag)) {
+    verify = verify.filter(function (obj) {
+      return obj.user !== author.tag;
+    });
+    author.send("Okay, cancelled your verification.")
+  } else {
+    author.send("You have no active verification.")
   }
 }
   
