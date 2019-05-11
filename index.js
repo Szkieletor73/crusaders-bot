@@ -48,11 +48,11 @@ client.on('message', msg => {
         break;
 
       case "verify":
-        commands.verify(args, msg.author)
+        commands.verify(args, msg.author, msg.member)
         break;
 
       case "done":
-        commands.verifyDone(msg.author, msg.member, guild)
+        commands.verifyDone(msg.author, guild)
         break;
 
       case "cancel":

@@ -47,25 +47,25 @@ exports.sendRaid = (args, leader, channel, guild) => {
   }
 }
 
-exports.verify = (args, author) => {
+exports.verify = (args, author, member) => {
   if(args.length != 0){
     console.log("Verification started for user: " + author.tag)
     let player = args[0]
     let tag = util.genVerifyTag(8)
-    verify.push({ "user": author.tag, "player": player, "tag": tag })
+    verify.push({ "user": author.tag, "player": player, "tag": tag, "member": member })
     author.send("Verification started. Please go to your RealmEye profile and add the following to *any* line of your description: `" + tag + "`\nWhen you're done, reply with `" + config.prefix + "done`\nIf something went wrong, use `" + config.prefix + "cancel` and try again")
   } else {
     author.send("Please include your full name as visible on RealmEye, like this: `!verify " + author.username + "`")
   }
 }
 
-exports.verifyDone = (author, member, guild) => {
+exports.verifyDone = (author, guild) => {
   console.log(verify)
   if (verify.find(x => x.user == author.tag)) {
     entry = verify.find(x => x.user == author.tag)
     util.getRealmEye(entry.player).then(res => {
       if ((res.desc1.includes(entry.tag) || res.desc2.includes(entry.tag) || res.desc3.includes(entry.tag)) && res.guild == "Crusaders of Halls") {
-        member.addRole(guild.roles.find(role => role.name == res.guild_rank))
+        entry.member.addRole(guild.roles.find(role => role.name == res.guild_rank))
         author.send("Verification for " + res.player + " successful. Welcome!")
       } else {
         author.send("Verification failed - couldn't find the verification tag in your description, or you're not a member of the guild. Try again, or DM any Owner to verify manually.\nTry !cancel if you need a new tag.")
