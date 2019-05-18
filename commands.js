@@ -34,7 +34,11 @@ exports.sendRaid = (args, leader, channel, guild) => {
       .then(function (call) {
 
         raids[type].reacts.forEach(async function (el) {
-          await call.react(guild.emojis.find(emoji => emoji.name == el)).then().catch(console.error)
+          try{
+            await call.react(guild.emojis.find(emoji => emoji.name == el)).then().catch(console.error)
+          } catch(TypeError) {
+            console.error("Missing emoji: " + el)
+          }
         })
 
         call.awaitReactions(filter, { max: 1 })
@@ -47,28 +51,38 @@ exports.sendRaid = (args, leader, channel, guild) => {
   }
 }
 
-exports.verify = (args, author, member) => {
+exports.verify = (args, author, member, guild) => {
   if(args.length != 0){
     console.log("Verification started for user: " + author.tag)
     let player = args[0]
     let tag = util.genVerifyTag(8)
-    verify.push({ "user": author.tag, "player": player, "tag": tag, "member": member })
+    verify.push({ "user": author.tag, "player": player, "tag": tag, "member": member, "guild": guild })
     author.send("Verification started. Please go to your RealmEye profile and add the following to *any* line of your description: `" + tag + "`\nWhen you're done, reply with `" + config.prefix + "done`\nIf something went wrong, use `" + config.prefix + "cancel` and try again")
   } else {
     author.send("Please include your full name as visible on RealmEye, like this: `!verify " + author.username + "`")
   }
 }
 
-exports.verifyDone = (author, guild) => {
+exports.verifyDone = (author) => {
   if (verify.find(x => x.user == author.tag)) {
     entry = verify.find(x => x.user == author.tag)
     util.getRealmEye(entry.player).then(res => {
-      if ((res.desc1.includes(entry.tag) || res.desc2.includes(entry.tag) || res.desc3.includes(entry.tag)) && res.guild == "Crusaders of Halls") {
-        entry.member.addRole(guild.roles.find(role => role.name == res.guild_rank))
-        author.send("Verification for " + res.player + " successful. Welcome!")
-        verify = verify.filter(function (obj) {
-          return obj.user !== author.tag;
-        });
+      if ((res.desc1.includes(entry.tag) || res.desc2.includes(entry.tag) || res.desc3.includes(entry.tag))) {
+        if ((res.guild == "Crusaders of Halls" && entry.guild.name == "Crusaders of Halls") || (res.guild == "I Never Nexus" && entry.guild.name == "Never Nexus")) {
+          // if member of current server's guild
+          entry.member.addRole(entry.guild.roles.find(role => role.name == res.guild_rank))
+          author.send("Verification for " + res.guild + " " + res.guild_rank + " " + res.player + " successful. Welcome!")
+          verify = verify.filter(function (obj) {
+            return obj.user !== author.tag;
+          });
+        } else if (entry.guild.name == "Never Nexus" && (res.guild == "Crusaders of Halls" || res.guild == "I Never Nexus")) {
+          // if member of allied guild on Never Nexus server
+          entry.member.addRole(entry.guild.roles.find(role => role.name == "Raider"))
+          author.send("Verification for Never Nexus ally " + res.player + " successful. Welcome!")
+          verify = verify.filter(function (obj) {
+            return obj.user !== author.tag;
+          });
+        }
       } else {
         author.send("Verification failed - couldn't find the verification tag in your description, or you're not a member of the guild. Try again, or DM any Owner to verify manually.\nTry !cancel if you need a new tag.")
       }

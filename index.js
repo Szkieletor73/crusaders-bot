@@ -21,7 +21,7 @@ var guild
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
-  guild = client.guilds.find(x => x.id == "552608426966908928")
+  // guild = client.guilds.find(x => x.id == "552608426966908928")
 });
 
 client.on('message', msg => {
@@ -29,8 +29,10 @@ client.on('message', msg => {
     let content = msg.content.split(" ")
     var cmd = content.shift().substring(1, msg.content.length)
     var args = content
-    console.log("[" + new Date() + "] Received command " + cmd + " from " + msg.author.tag + " with the following arguments: ")
-    console.log(args)
+    if (msg.guild != null)
+      console.log("[" + new Date() + "][" + msg.guild.name + "] Received command " + cmd + " from " + msg.author.tag + " with arguments: " + content.join(" "))
+    else
+      console.log("[" + new Date() + "][DM] Received command " + cmd + " from " + msg.author.tag + " with arguments: " + content.join(" "))
 
     switch (cmd) {
       case "raid":
@@ -48,12 +50,12 @@ client.on('message', msg => {
         break;
 
       case "verify":
-        commands.verify(args, msg.author, msg.member)
+        commands.verify(args, msg.author, msg.member, msg.guild)
         msg.delete()
         break;
 
       case "done":
-        commands.verifyDone(msg.author, guild)
+        commands.verifyDone(msg.author)
         break;
 
       case "cancel":
