@@ -1,5 +1,8 @@
-{
-  "generic": {
+const config = require('./config')
+const emoji = require('./emoji')
+
+module.exports = {
+  "common": {
     "end": "\nRaid leader can react with ${guild.emojis.find(emoji => emoji.name == 'no')} to end the call.",
     "voice": "\nVoice channel: ",
     "ended": "Run is in progress or complete.",
@@ -11,15 +14,15 @@
     "name": "Event Dungeons",
     "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'pcave')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'thicckey')} if you have any event keys and are willing to pop.\nReact with a class or ability if you plan to bring it to the run.",
     "reacts": [
-      "pcave",
-      "thicckey",
-      "paladin",
-      "warrior",
-      "knight",
-      "mystic",
-      "planewalker",
-      "priest",
-      "no"
+      emoji.portal.pcave,
+      emoji.key.thicket,
+      emoji.class.paladin,
+      emoji.class.warrior,
+      emoji.class.knight,
+      emoji.class.mystic,
+      emoji.class.priest,
+      emoji.item.planewalker,
+      emoji.generic.cancel
     ]
   },
   "cult": {
@@ -28,19 +31,18 @@
     "name": "Lost Halls - Cult",
     "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'cult')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'lostHalls')} if you have a key and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
     "reacts": [
-      "cult",
-      "lostHalls",
-      "paladin",
-      "warrior",
-      "knight",
-      "ogmur",
-      "paladin",
-      "mseal",
-      "mystic",
-      "planewalker",
-      "priest",
-      "puri",
-      "no"
+      emoji.portal.cult,
+      emoji.key.losthalls,
+      emoji.class.paladin,
+      emoji.class.warrior,
+      emoji.class.knight,
+      emoji.item.ogmur,
+      emoji.item.mseal,
+      emoji.class.mystic,
+      emoji.item.planewalker,
+      emoji.class.priest,
+      emoji.item.puri,
+      emoji.generic.cancel
     ]
   },
   "void": {
@@ -49,20 +51,19 @@
     "name": "Lost Halls - Void",
     "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'void')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'lostHalls')} if you have a key and are willing to pop.\nReact with ${guild.emojis.find(emoji => emoji.name == 'vial')} if you have a vial and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
     "reacts": [
-      "void",
-      "lostHalls",
-      "vial",
-      "paladin",
-      "warrior",
-      "knight",
-      "ogmur",
-      "paladin",
-      "mseal",
-      "mystic",
-      "planewalker",
-      "priest",
-      "puri",
-      "no"
+      emoji.portal.void,
+      emoji.key.losthalls,
+      emoji.key.vial,
+      emoji.class.paladin,
+      emoji.class.warrior,
+      emoji.class.knight,
+      emoji.item.ogmur,
+      emoji.item.mseal,
+      emoji.class.mystic,
+      emoji.item.planewalker,
+      emoji.class.priest,
+      emoji.item.puri,
+      emoji.generic.cancel
     ]
   },
   "tomb": {
@@ -71,11 +72,11 @@
     "name": "Tomb of the Ancients",
     "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'tomb')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'tombkey')} if you have a key and are willing to pop.\nReact with a class and ability if you plan to bring it to the run.",
     "reacts": [
-      "tomb",
-      "tombkey",
-      "mystic",
-      "planewalker",
-      "no"
+      emoji.portal.tomb,
+      emoji.key.tomb,
+      emoji.class.mystic,
+      emoji.item.planewalker,
+      emoji.generic.cancel
     ]
   },
   "thicket": {
@@ -84,8 +85,8 @@
     "name": "Secluded Thicket",
     "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'thicc')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'thicckey')} if you have a key and are willing to pop.",
     "reacts": [
-      "thicc",
-      "thicckey",
+      emoji.portal.thicket,
+      emoji.key.thicket,
       "no"
     ]
   },
@@ -95,24 +96,24 @@
     "name": "Ocean Trench",
     "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'ot')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'otkey')} if you have a key and are willing to pop.\nReact with ${guild.emojis.find(emoji => emoji.name == 'planewalker')} if you can and want to rush.",
     "reacts": [
-      "ot",
-      "otkey",
-      "planewalker",
-      "no"
+      emoji.portal.ot,
+      emoji.key.ot,
+      emoji.item.planewalker,
+      emoji.generic.cancel
     ]
   },
   "shatts": {
     "icon": "https://static.drips.pw/rotmg/wiki/Environment/Portals/The%20Shatters.png",
     "color": "GREEN",
     "name": "Shatters",
-    "desc": "React with ${guild.emojis.find(emoji => emoji.name == 'shatts')} and join voice to participate.\nReact with ${guild.emojis.find(emoji => emoji.name == 'shattskey')} if you have a key and are willing to pop.\nReact with a class or ability if you plan to bring it to the run.\nReact with ${guild.emojis.find(emoji => emoji.name == 'planewalker')} if you have a Planewalker or a Trickster.\nReact with ${guild.emojis.find(emoji => emoji.name == 'priest')} if you have a priest capable of supporting lavawalking.",
+    "desc": "React with " + emoji.portal.shatters + " if you wish to participate.\nReact with " + emoji.key.shatters + " if you're willing to pop a key.\nReact with an item or class if you want to bring it to the run.",
     "reacts": [
-      "shatts",
-      "shattskey",
-      "mystic",
-      "planewalker",
-      "priest",
-      "no"
+      emoji.portal.shatters,
+      emoji.key.shatters,
+      emoji.class.mystic,
+      emoji.item.planewalker,
+      emoji.class.priest,
+      emoji.generic.cancel
     ]
   }
 }

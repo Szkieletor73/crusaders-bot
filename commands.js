@@ -13,14 +13,57 @@ const util = require('./utils')
 
 var verify = []
 
-exports.sendRaid = (args, leader, channel, guild) => {
+const handleCommand = (msg) => {
+  if (msg.content.indexOf(config.prefix) === 0) {
+    let content = msg.content.split(" ")
+    var cmd = content.shift().substring(1, msg.content.length)
+    var args = content
+    if (msg.guild != null)
+      console.log("[" + new Date() + "][" + msg.guild.name + "] Received command " + cmd + " from " + msg.author.tag + " with arguments: " + content.join(" "))
+    else
+      console.log("[" + new Date() + "][DM] Received command " + cmd + " from " + msg.author.tag + " with arguments: " + content.join(" "))
+
+    switch (cmd) {
+      case "raid":
+        sendRaid(args, msg.author, msg.channel, msg.guild)
+        msg.delete()
+        break;
+
+      case "listEmojis":
+        if (msg.author.id == 95310448697548800) {
+          console.log(msg.guild.emojis)
+          msg.reply("Check bot logs.")
+        } else {
+          msg.reply("You can't do that.")
+        }
+        break;
+
+      case "verify":
+        verify(args, msg.author, msg.member, msg.guild)
+        msg.delete()
+        break;
+
+      case "done":
+        verifyDone(msg.author)
+        break;
+
+      case "cancel":
+        verifyCancel(msg.author)
+        break;
+
+      default:
+        console.log("Unknown command.")
+    }
+  }
+}
+
+const sendRaid = (args, leader, channel, guild) => {
   /***
    * Handles raid messages.
-   * Requires an `args` table with the following format:
-   * @param type - raid type, required at all times
-   * @param time - HH:MM. Time will be ommited entirely if not specified.
-   * @param date - Wolfram Alpha format - most formats should work. Optional.
-   * @param timezone - ex. UTC-7, or GMT+3; assumed UTC-0 if not specified.
+   * @param args - an array in the following format: raid type, raid time (HH:MM), date (in wolfram alpha format, optional, timezone (UTC-0 if not specified)
+   * @param leader - raid leader user object
+   * @param channel - raid channel object
+   * @param guild - guild object
    ***/
   var type = args.shift()
   if(args != [])
@@ -51,7 +94,7 @@ exports.sendRaid = (args, leader, channel, guild) => {
   }
 }
 
-exports.verify = (args, author, member, guild) => {
+const verify = (args, author, member, guild) => {
   if(args.length != 0){
     console.log("Verification started for user: " + author.tag)
     let player = args[0]
@@ -63,7 +106,7 @@ exports.verify = (args, author, member, guild) => {
   }
 }
 
-exports.verifyDone = (author) => {
+const verifyDone = (author) => {
   if (verify.find(x => x.user == author.tag)) {
     entry = verify.find(x => x.user == author.tag)
     util.getRealmEye(entry.player).then(res => {
@@ -92,7 +135,7 @@ exports.verifyDone = (author) => {
   }
 }
 
-exports.verifyCancel = (author) => {
+const verifyCancel = (author) => {
   if(verify.find(x => x.user == author.tag)) {
     verify = verify.filter(function (obj) {
       return obj.user !== author.tag;

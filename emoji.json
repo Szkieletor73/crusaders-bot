@@ -1,0 +1,37 @@
+{
+    "portal": {
+        "pcave": "pcave",
+        "tomb": "tomb",
+        "cult": "cult",
+        "void": "void",
+        "shatters": "shatts",
+        "thicket": "thicc",
+        "ot": "ot"
+    },
+    "key": {
+        "pcave": "pcavekey",
+        "tomb": "tombkey",
+        "losthalls": "hallskey",
+        "shatters": "shattskey",
+        "thicket": "thicckey",
+        "ot": "otkey"
+    },
+    "item": {
+        "planewalker": "planewalker",
+        "puri": "puri",
+        "ogmur": "ogmur",
+        "mseal": "mseal"
+    },
+    "class": {
+        "warrior": "warrior",
+        "paladin": "paladin",
+        "knight": "knight",
+        "rogue": "rogue",
+        "trickster": "trickster",
+        "priest": "priest",
+        "mystic": "mystic"
+    },
+    "generic": {
+        "cancel": "cancel"
+    }
+}

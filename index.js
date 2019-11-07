@@ -13,59 +13,12 @@ const util = require('./utils')
 
 dotenv.config()
 
-var guild
-
-// var verify = []
-
 // Hooks
-
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
-  // guild = client.guilds.find(x => x.id == "552608426966908928")
 });
 
-client.on('message', msg => {
-  if (msg.content.indexOf(config.prefix) === 0) {
-    let content = msg.content.split(" ")
-    var cmd = content.shift().substring(1, msg.content.length)
-    var args = content
-    if (msg.guild != null)
-      console.log("[" + new Date() + "][" + msg.guild.name + "] Received command " + cmd + " from " + msg.author.tag + " with arguments: " + content.join(" "))
-    else
-      console.log("[" + new Date() + "][DM] Received command " + cmd + " from " + msg.author.tag + " with arguments: " + content.join(" "))
-
-    switch (cmd) {
-      case "raid":
-        commands.sendRaid(args, msg.author, msg.channel, msg.guild)
-        msg.delete()
-        break;
-
-      case "listEmojis":
-        if(msg.author.id == 95310448697548800) {
-          console.log(msg.guild.emojis)
-          msg.reply("Check bot logs.")
-        } else {
-          msg.reply("You can't do that.")
-        }
-        break;
-
-      case "verify":
-        commands.verify(args, msg.author, msg.member, msg.guild)
-        msg.delete()
-        break;
-
-      case "done":
-        commands.verifyDone(msg.author)
-        break;
-
-      case "cancel":
-        commands.verifyCancel(msg.author)
-        break;
-
-      default:
-        console.log("Unknown command.")
-    }
-  }
-});
+client.on('message', commands.handleCommand(msg)
+);
 
 client.login(process.env.BOT_TOKEN);
